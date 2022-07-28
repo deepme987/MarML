@@ -1,0 +1,68 @@
+APPLICATIONS:
+https://github.com/VIAME/VIAME
+
+Key datasets: MaSTr1325 MODD2, MODS, SMD, MID, VAIS, MarDCT, PETS2016, MARVEL, MassMIND, KOLOMVERSE
+
+https://box.vicos.si/borja/viamaro/index.html
+https://www.vicos.si/resources/mastr1325/
+https://www.vicos.si/Downloads/MODD
+https://github.com/bborja/modd
+https://github.com/bborja/mods_evaluation
+https://vision.fe.uni-lj.si/RESEARCH/modd/
+https://github.com/bborja/mods_evaluation
+https://sites.google.com/site/dilipprasad/home/singapore-maritime-dataset
+https://github.com/aluckyi/MID
+https://www.researchgate.net/deref/http%3A%2F%2Fvcipl-okstate.org%2Fpbvs%2Fbench%2FData%2F12%2FVAIS.zip
+http://www.diag.uniroma1.it//~labrococo/MAR/
+http://www.dis.uniroma1.it/~labrococo/MAR/
+http://www.ipatchproject.eu/results.aspx
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0205319 https://pspagnolo.jimdofree.com/download/
+https://pspagnolo.jimdofree.com/download/
+https://www.kaggle.com/datasets/tezdhar/marvel-maritime-vessels-classification-dataset
+https://zenodo.org/record/4736931
+https://www.kaggle.com/code/arpitjain007/ship-classification/data
+https://www.kaggle.com/competitions/statoil-iceberg-classifier-challenge/overview
+https://www.shipspotting.com/
+https://github.com/uml-marine-robotics/MassMIND (LWIR)
+https://github.com/Autoferry/sensor_fusion_dataset
+https://github.com/MaritimeDataset/KOLOMVERSE
+https://github.com/PC-Lab-Virtual-Reality/Synthetic-Boat-Re-Identification-Dataset
+
+YouTube:
+https://www.youtube.com/watch?v=JpVKgrfkqs0 (2K, calm, lots of targets, fog)
+https://www.youtube.com/watch?v=U-MFYTeJZqc (2K, lots of targets, calm SS)
+https://www.youtube.com/watch?v=MgXEL2tpTqc (2K, boat, rough SS)
+https://www.youtube.com/watch?v=U-MFYTeJZqc (2K, lots of targets, land, birds, calm SS)
+https://www.youtube.com/watch?v=BknhFXC3i74&list=RDCMUCvWe3bMhEXz57UmuSBDLmFQ&index=3 (2K, warship, aircraft)
+
+https://www.youtube.com/watch?v=mVZoJyWRS9Q (720p, different targets, land, birds)
+https://www.youtube.com/watch?v=3tFdOqKV2Iw (720p, no targets)
+https://www.youtube.com/watch?v=cat30PaExyo (2K, rough SS, no targets, fog, rain, water drops)
+https://www.youtube.com/watch?v=nr6e3hRFidc (1080p, mid SS, no targets)
+https://www.youtube.com/watch?v=tXnTYvd3NfM (360p, fog, hazy, iceberg, bird)
+https://www.youtube.com/watch?v=sILweiPfBzA (1080p, icebergs, boats, hazy)
+https://www.youtube.com/watch?v=DpJwao_fxmM (2K, calm, different targets, birds)
+https://www.youtube.com/watch?v=-NDqy_G13t0 (1080p, pirates, EO+IR, missile)
+https://www.youtube.com/watch?v=d3A0is0pXUQ (360p, pirates)
+https://www.youtube.com/watch?v=AQdw0MK3qik (720p, boat, haze)
+https://www.youtube.com/watch?v=x09BP7hlz2Y&list=RDCMUCvWe3bMhEXz57UmuSBDLmFQ&index=2 (2K, rough SS, hurricane, no targets)
+https://www.youtube.com/watch?v=aBM7NgMhg90 (720p, rough SS, boats, no targets)
+https://www.youtube.com/watch?v=WKmwdgilJTs (720p, rough SS, boats, barges)
+https://www.youtube.com/watch?v=NJIZTL2ZyEw (1080p, rough SS, military boat, heli)
+https://www.youtube.com/watch?v=KsWuBMjxZM4 (1080p, heli, boats)
+https://www.youtube.com/watch?v=AMowaZ3I90o (480p, missile)
+https://www.youtube.com/watch?v=uXk8JAQ-370 (720p, missile)
+https://www.youtube.com/watch?v=DZCLKq1XVFg (1080p, rough SS, short range, big ships)
+https://www.youtube.com/watch?v=BxeI4dUhaHw (720p, human)
+https://www.youtube.com/watch?v=OoFCDyvXUrc (1080p, human, short range)
+https://www.youtube.com/watch?v=ZzGB-_uj6RI (2K, human)
+https://www.youtube.com/watch?v=jYydED6cXtI (480p, different lights, boats, buoys)
+https://www.youtube.com/watch?v=cMNH4nmOims (2K, rough SS, lightning, rain)
+https://www.youtube.com/watch?v=JNSmjNsCe8M (720p, rough SS)
+https://www.youtube.com/watch?v=dA-9tqfz0ms (4k, dense fog, targets)
+
+Evaluation:
+https://github.com/tilemmpon/Singapore-Maritime-Dataset-Trained-Deep-Learning-Models
+https://github.com/tilemmpon/Singapore-Maritime-Dataset-Frames-Ground-Truth-Generation-and-Statistics
+https://github.com/yaoshanliang/Singapore-Maritime-Dataset
+https://github.com/levan92/SgMaritimeDatasetParser

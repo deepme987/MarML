@@ -1,0 +1,25 @@
+Fast-RCNN
+SSD
+Faster-RCNN
+MaskRCNN
+DINO
+SWIN
+Florence
+GLIP
+Dyhead
+VitAdapter
+FocalL
+YOLOR-D6
+Pycenter (USing CenterNet)
+DetectoRS
+VitTransformer
+SpinetNets
+PAA-ResNext
+LSNet
+RelationNet++
+DETR and its variants
+SWIN V2
+
+DINO:
+	Current top
+	improved DETR

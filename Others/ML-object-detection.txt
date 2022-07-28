@@ -1,0 +1,60 @@
+MLMarObj: A machine learning library for detecting small and large objects in videos  (Milestone 1 of MarObj)
+
+1. The objective is to develop a flexible Python library to detect, classify and track objects (e.g., maritime vessels, debris, icebergs, low-flying aircraft, birds) in videos obtained from a moving maritime vessel using machine learning algorithms based on published papers, open-source libraries and/or new development. 
+
+2. MLMarObj should support different ML algorithms/models/architectures using our standard Python interface classes for detection, semantic segmentation and tracking. Each model should be an instance of the instance class. 
+
+3. The videos are obtained under different lighting, weather and wave conditions. 
+
+4. Some objects may occupy only a few pixels (5x5 to 32x32), which we call small, while other objects may occupy lots of pixels (above 32x32), which we call large.  
+
+5. We want to detect both small and large objects using ML techniques specifically designed to handle these two types of objects. The minimum size to reliably detect small objects is 5x5 while that for large objects is 32x32.
+
+6. At times, it may not be possible to classify small objects. In that case, simply detecting the presence of objects would suffice.
+
+7. We need to handle object occlusion due to waves or other objects.
+
+8. There should be no hard-coded model parameters in the code. Everything must be parameterized in an XML file. The choice of algorithm to use in a particular instance, parameters for that algorithm, any model parameters (e.g., class list and associate probabilities and models) or training networks must be parameterized. Based on the configuration file with parameters, models and rules, we should be able to apply the same library for different datasets.
+
+9. During initialization, the parameters must be read from the XML file. Make sure that the input parameters are validated during initialization and return an error if validation fails.
+
+10. The list of classes in a particular scenario might be hierarchical (e.g., maritime->boat, maritime->ship, maritime->ship->military, maritime->ship->civilian, air->drone, air->bird). Ideally, we want to support hierarchical classification. The classification output options and any parameters must be defined in the config file.
+
+11. In addition to algorithmic decision making, MLMarObj  can use  context information (e.g., on land, over water) and add rules (e.g., appears in the sky it cannot be a ship!) on top of the algorithmic output. GIS information could be an input parameter or it can use a call back to request map information. That is, mere application of models or code from GitHub will not suffice. We need image preprocessing (e.g., to remove the effects of environmental effects), detection/track postprocessing (e.g., remove false alarms based on size or speed, rejecting unlikely detections using semantic segmentation), auxiliary image processing (e.g., semantic segmentation), etc., to remove false alarms and improve detection reliability. If you can use such context information in your detector, it will be provided to you. However, you are responsible for pre- and post processing. What we need is a usable practical solution for small and large object detection that will work on other real data, not a simple repackaging of some model or code from GitHub. 
+
+12. In any dataset, only 70% randomly selected frames can be used for training. The datasets used for training must be delivered with source code. The indices of frames in each dataset used for training must be saved in a file. 
+
+13. MLMarObj should be platform-independent with support for Windows and Linux operating systems running on Intel x64 and ARM64 processors.
+
+14. MLMarObj should optionally make use of one or more GPUs (CUDA) on a computer. ideally, it should work even without a CPU, but this requirement may be ignored initially.
+
+15. There is no need for a GUI at this point. A simple main program that makes use of MLMarObj to generate output is needed for demonstration, validation and comparison against other tools (e.g., MATLAB).
+
+16. Open-source libraries can be used to simplify the development process. Any other open-source library, except for those with GPL or similarly restrictive licensing, is fine.
+
+17. As much as possible, use long meaningful names for variable names in the code. Variable names such as a1, x21, xy3, etc., must be avoided. That is, the code must be self-documenting. The code cannot crash. You must catch and throw errors appropriately. 
+
+19. Extensive line-by-line commenting is not needed, but there must be sufficient comments to explain the purpose of a function, variable or parameter.
+
+20. A short document (in Word or text format) describing the code, application and compilation process must be delivered along with source code, references, models, data used for training, etc.
+
+Datasets:
+https://sites.google.com/site/dilipprasad/home/singapore-maritime-dataset
+https://www.vicos.si/Downloads/MODD
+http://www.dis.uniroma1.it/~labrococo/MAR/
+https://vislab.isr.tecnico.ulisboa.pt/seagull-dataset/
+
+YouTube videos:
+https://www.youtube.com/watch?v=JpVKgrfkqs0 (2K, calm, lots of targets, fog)
+https://www.youtube.com/watch?v=MgXEL2tpTqc (2K, boat, rough SS)
+https://www.youtube.com/watch?v=U-MFYTeJZqc (2K, lots of targets, land, birds, calm SS)
+https://www.youtube.com/watch?v=BknhFXC3i74&list=RDCMUCvWe3bMhEXz57UmuSBDLmFQ&index=3 (2K, warship, aircraft)
+https://www.youtube.com/watch?v=mVZoJyWRS9Q (720p, different targets, land, birds)
+https://www.youtube.com/watch?v=3tFdOqKV2Iw (720p, no targets)
+https://www.youtube.com/watch?v=cat30PaExyo (2K, rough SS, no targets, fog, rain, water drops)
+https://www.youtube.com/watch?v=nr6e3hRFidc (1080p, mid SS, no targets)
+https://www.youtube.com/watch?v=tXnTYvd3NfM (360p, fog, hazy, iceberg, bird)
+https://www.youtube.com/watch?v=sILweiPfBzA (1080p, icebergs, boats, hazy)
+https://www.youtube.com/watch?v=DpJwao_fxmM (2K, calm, different targets, birds)
+https://www.youtube.com/watch?v=-NDqy_G13t0 (1080p, pirates, EO+IR, missile)
+https://www.youtube.com/watch?v=d3A0is0pXUQ (360p, pirates)
