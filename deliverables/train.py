@@ -7,6 +7,7 @@ from torchvision import transforms as T
 
 from smd import SMDDataset
 from frcnn import get_frcnn_model
+from retinanet import get_retina_model
 from efficientnet import get_eb_model, train_one_epoch_eb
 from engine import train_one_epoch, evaluate
 
@@ -22,6 +23,9 @@ MODEL_MAP = {
     },
     "EB": {
         "model": get_eb_model
+    },
+    "Retina": {
+        "model": get_retina_model
     }
 }
 
@@ -53,7 +57,12 @@ def train_model(architecture="FRCNN", model_checkpoint=None, eval_only=False):
     print("Using device:", device)
 
     data = SMDDataset(DATA_DIR, transform=get_transform(True))
-    data_loader, data_loader_test = utils.get_split_dataset(data, split_ratio=TRAIN_TEST_SPLIT, batch_size=BATCH_SIZE)
+
+    if eval_only:
+        data_loader_test = torch.utils.data.DataLoader(data, batch_size=BATCH_SIZE, shuffle=True, num_workers=0, collate_fn=utils.collate_fn)
+
+    else:
+        data_loader, data_loader_test = utils.get_split_dataset(data, split_ratio=TRAIN_TEST_SPLIT, batch_size=BATCH_SIZE)
 
     # our dataset has two classes only - background and person
     num_classes = NUM_CLASSES
@@ -69,25 +78,27 @@ def train_model(architecture="FRCNN", model_checkpoint=None, eval_only=False):
 
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = torch.optim.SGD(params, lr=LEARNING_RATE, momentum=0.9, weight_decay=0.0005)
-    criterion = nn.CrossEntropyLoss()
 
     # Start with higher LR and drop with increase in epochs
     lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.1)
 
     num_epochs = EPOCHS
 
-    for epoch in range(num_epochs):
-        if not eval_only:
-            if architecture == "FRCNN":
-                train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq=10)
-            elif architecture == "EB":
-                train_one_epoch_eb(model, optimizer, data_loader, device, epoch, print_freq=10)
-            lr_scheduler.step()
-
+    if eval_only:
         evaluate(model, data_loader_test, device=device)
+        return
 
-        torch.save(model, f"{architecture}-{epoch}.pth")
+    for epoch in range(num_epochs):
+        if architecture == "FRCNN" or architecture == "Retina":
+            train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq=10)
+        elif architecture == "EB":
+            train_one_epoch_eb(model, optimizer, data_loader, device, epoch, print_freq=10)
+        lr_scheduler.step()
+
+        # evaluate(model, data_loader_test, device=device)
+
+        torch.save(model, f"models/{architecture}-{epoch}.pth")
 
 
 if __name__ == '__main__':
-    train_model(architecture=MODEL_NAME, model_checkpoint=MODEL_CHECKPOINT, eval_only=True)
+    train_model(architecture=MODEL_NAME, model_checkpoint=MODEL_CHECKPOINT, eval_only=EVAL_FLAG)

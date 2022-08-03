@@ -4,7 +4,8 @@ TRAIN_TEST_SPLIT = 0.8
 EPOCHS = 10
 BATCH_SIZE = 2
 NUM_CLASSES = 11
+EVAL_FLAG = False
 
 DATA_DIR = "../SMD/NIR/data_yolo/"
-MODEL_CHECKPOINT = None
-MODEL_NAME = "FRCNN"  # ["EB", "FRCNN", "M2Det"]
+MODEL_CHECKPOINT = "models/Retina-1.pth"
+MODEL_NAME = "Retina"  # ["FRCNN", "Retina"]

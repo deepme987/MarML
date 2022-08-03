@@ -1,6 +1,8 @@
 import math
+import os.path
 import sys
 import time
+import pickle
 
 import torch
 import torchvision.models.detection.mask_rcnn
@@ -82,7 +84,14 @@ def evaluate(model, data_loader, device):
     metric_logger = utils.MetricLogger(delimiter="  ")
     header = "Test:"
 
-    coco = get_coco_api_from_dataset(data_loader.dataset)
+    if os.path.exists("coco_save.pkl"):
+        with open("coco_save.pkl", "rb") as f:
+            coco = pickle.load(f)
+    else:
+        coco = get_coco_api_from_dataset(data_loader.dataset)
+        with open("coco_save.pkl", "wb") as f:
+            pickle.dump(coco, f)
+
     iou_types = _get_iou_types(model)
     coco_evaluator = CocoEvaluator(coco, iou_types)
 
