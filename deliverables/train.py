@@ -21,13 +21,14 @@ MODEL_MAP = {
     "FRCNN": {
         "model": get_frcnn_model
     },
-    "EB": {
-        "model": get_eb_model
-    },
+    # "EB": {
+    #     "model": get_eb_model
+    # },
     "Retina": {
         "model": get_retina_model
     }
 }
+
 
 """
 # Possible transformation
@@ -58,21 +59,17 @@ def train_model(architecture="FRCNN", model_checkpoint=None, eval_only=False):
 
     data = SMDDataset(DATA_DIR, transform=get_transform(True))
 
-    if eval_only:
-        data_loader_test = torch.utils.data.DataLoader(data, batch_size=BATCH_SIZE, shuffle=True, num_workers=0, collate_fn=utils.collate_fn)
+    data_loader = torch.utils.data.DataLoader(data, batch_size=BATCH_SIZE, shuffle=True, num_workers=0, collate_fn=utils.collate_fn)
 
-    else:
-        data_loader, data_loader_test = utils.get_split_dataset(data, split_ratio=TRAIN_TEST_SPLIT, batch_size=BATCH_SIZE)
+    # data_loader, data_loader_test = utils.get_split_dataset(data, split_ratio=TRAIN_TEST_SPLIT, batch_size=BATCH_SIZE)
 
     # our dataset has two classes only - background and person
     num_classes = NUM_CLASSES
 
     # TODO: Add this based on variable (maybe dict mapper?)
 
-    if model_checkpoint:
-        model = MODEL_MAP[architecture]["model"](model_path=model_checkpoint)
-    else:
-        model = MODEL_MAP[architecture]["model"](model_path=None, num_classes=num_classes, pretrained=True, fine_tune=True)
+    model = MODEL_MAP[architecture]["model"](model_path=model_checkpoint, num_classes=num_classes,
+                                             pretrained=True, fine_tune=True)
 
     model.to(device)
 
@@ -85,17 +82,12 @@ def train_model(architecture="FRCNN", model_checkpoint=None, eval_only=False):
     num_epochs = EPOCHS
 
     if eval_only:
-        evaluate(model, data_loader_test, device=device)
+        evaluate(model, data_loader, device=device)
         return
 
     for epoch in range(num_epochs):
-        if architecture == "FRCNN" or architecture == "Retina":
-            train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq=10)
-        elif architecture == "EB":
-            train_one_epoch_eb(model, optimizer, data_loader, device, epoch, print_freq=10)
+        train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq=10)
         lr_scheduler.step()
-
-        # evaluate(model, data_loader_test, device=device)
 
         torch.save(model, f"models/{architecture}-{epoch}.pth")
 

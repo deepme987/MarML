@@ -2,7 +2,7 @@
 import torch
 import numpy as np
 
-from frcnn import get_frcnn_model
+from retinanet import get_retina_model
 
 
 class iClass:
@@ -14,11 +14,12 @@ class iClass:
 
     def initialize(self, model_path=None, device=None):
         # Initialize
+        # Half precision affecting predictions
         # self.half = self.device.type != 'cpu'  # half precision only supported on CUDA
 
         if not model_path:
             print("Missing model checkpoint")
-        self.model = get_frcnn_model(model_path=model_path)
+        self.model = get_retina_model(model_path=model_path)
         self.model.eval()
 
         # TODO: image sizes not needed?
@@ -61,7 +62,7 @@ class iClass:
 if __name__ == '__main__':
     # Test snippet
     model = iClass()
-    model.initialize("models/Retina-2.pth")
+    model.initialize("models/Retina-1.pth")
 
     import cv2
     img = cv2.imread("../test.jpg")
